@@ -38,7 +38,7 @@ class InteractiveRecord
   def values_for_insert
     values = []
     self.class.column_names.each do |col_name|
-      values << "'#{send(col_name)}'" unless send(col_name).nil?
+      values << "'#{send(col_name)}'" unless send(col_name) == nil
     end
     values.join(", ")
   end
@@ -52,10 +52,10 @@ class InteractiveRecord
     DB[:conn].execute(sql)
   end
 
-  def self.find_by(attribute_hash)
-    value = attribute_hash.values.first
-    formatted_value = value.class == Fixnum ? value : "'#{value}'"
-    sql = "SELECT * FROM #{self.table_name} WHERE #{attribute_hash.keys.first} = #{formatted_value}"
+  def self.find_by(attributes)
+    value = attributes.values.first
+    format_value = value.class == Fixnum ? value : "'#{value}'"
+    sql = "SELECT * FROM #{self.table_name} WHERE #{attributes.keys.first} = #{format_value}"
     DB[:conn].execute(sql)
   end
 end
