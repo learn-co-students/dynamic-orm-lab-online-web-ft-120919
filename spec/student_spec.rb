@@ -90,6 +90,7 @@ describe Student do
       end
     end
 
+
     describe '#save' do
       it 'saves the student to the db' do
         new_student.save
@@ -101,6 +102,7 @@ describe Student do
         expect(new_student.id).to eq(1)
       end
     end
+
   end
 
   describe '.find_by_name' do

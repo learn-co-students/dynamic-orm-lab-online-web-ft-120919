@@ -52,17 +52,29 @@ class InteractiveRecord
 
   def self.find_by_name(name)
     sql = "SELECT * FROM #{self.table_name} WHERE name = ?"
-    DB[:conn].execute(sql, name)
+    results = DB[:conn].execute(sql, name)
+      #remove_extra_keys(results)
   end
 
   def self.find_by(parameter_hash)
     key=parameter_hash.keys[0]
     value=parameter_hash[key]
     sql = "SELECT * FROM #{self.table_name} WHERE #{key} = \"#{value}\""
-    #binding.pry
     #puts sql
-    DB[:conn].execute(sql)
+    results = DB[:conn].execute(sql) # array of hash returned
+      #remove_extra_keys(results)
+   #binding.pry
   end
+
+=begin
+  def self.remove_extra_keys(results)
+    results.map! do |hash|
+      hash.delete_if do |k, v|
+        k == 0 || k == 1 || k == 2
+      end
+    end
+  end
+=end
 
 
 end
