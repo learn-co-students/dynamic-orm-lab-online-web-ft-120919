@@ -23,12 +23,6 @@ class Student < InteractiveRecord
             column_names.compact
     end
 
-    def initialize(attrs={})
-        attrs.each do |key, value|
-            self.send("#{key}=", value)
-            binding.pry 
-        end
-        
-    end
+    
 
 end
