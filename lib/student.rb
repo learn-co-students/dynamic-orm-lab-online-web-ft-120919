@@ -4,7 +4,7 @@ require 'interactive_record.rb'
 require 'pry'
 
 class Student < InteractiveRecord
-
+   
     def self.table_name
         self.to_s.downcase.pluralize
     end
@@ -22,7 +22,14 @@ class Student < InteractiveRecord
             end
             column_names.compact
     end
-
+   
+    def initialize(attrs={})
+        attrs.each do |key, value|
+            # binding.pry 
+            self.send("#{key}=", value)
+        end
+        
+    end
     
 
 end
