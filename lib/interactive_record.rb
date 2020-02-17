@@ -52,11 +52,12 @@ class InteractiveRecord
     end
 
     def self.find_by(options = {})
-        attribute = options.keys.pop
-        value = options[attribute]
-        sql = "SELECT * FROM students WHERE #{attribute} = #{value}"
+        attribute = options.to_a.first.first
+        value = options.to_a.first.last
+        sql = "SELECT * FROM students WHERE #{attribute} = '#{value}'"
         DB[:conn].execute(sql)
         #pry
+        #UUUUUUUUUGGGGGGGGGHHHHHHHH
     end
 
 end
